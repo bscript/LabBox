@@ -1,0 +1,9 @@
+LabBox
+Copyright 2026 The LabBox authors
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+LabBox downloads the Alpine Linux kernel and ramdisk onto the user's machine
+when scripts/fetch-alpine.sh is run. Those files are not part of this
+repository and come under their own licenses, chiefly the GNU General Public
+License version 2 for the Linux kernel. See https://alpinelinux.org.
