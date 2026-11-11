@@ -3,6 +3,77 @@
 The detail behind the [README](../README.md): how each part is built, what was
 tested, and where it falls short.
 
+## The parts
+
+```mermaid
+flowchart LR
+    subgraph mac["Your Mac"]
+        cc["Claude Code"]
+        lb["LabBox<br/>labbox mcp / labbox run"]
+        gate["Network gate<br/>allow list · logs every request<br/>blocks your Mac and local network"]
+        store["Sandbox disks<br/>APFS snapshots"]
+        pane["Live pane<br/>labbox watch"]
+    end
+    subgraph vm["Linux VM · no network card · no shared folders"]
+        agent["labbox-agent"]
+        cmd["the untrusted command"]
+        bait["decoy keys<br/>~/.ssh · ~/.aws · ~/.npmrc ..."]
+    end
+    net(("Internet"))
+
+    cc -- "labbox_run" --> lb
+    lb -- "boots, sends command" --> agent
+    agent -- "load and save files" --> store
+    agent --> cmd
+    cmd -. "reads?" .-> bait
+    cmd -- "HTTP / HTTPS" --> gate
+    gate -- "allowed hosts only" --> net
+    agent -- "what it saw" --> lb
+    lb -- "output + report" --> cc
+    lb -- "live events" --> pane
+```
+
+## One run, step by step
+
+```mermaid
+sequenceDiagram
+    participant C as Claude Code
+    participant L as LabBox (your Mac)
+    participant V as Linux VM
+    participant N as Internet
+    C->>L: labbox_run "npm install x", sandbox, allowed hosts
+    L->>L: check hosts, copy the sandbox's disk
+    L->>V: boot (~0.3 s), load files, plant decoy keys
+    L->>V: run the command
+    V->>L: connect to registry.npmjs.org?
+    L->>N: allowed: connect and relay
+    V->>L: connect to unknown-server.com?
+    L-->>V: refused and logged
+    V->>L: output, decoys opened, programs started
+    L->>L: compare files, build report, throw changes away
+    L->>C: output + report, marked untrusted
+```
+
+Claude never runs inside the VM, and no API key goes in. Only text comes
+back: the command's output and the report, labelled as untrusted so the agent
+reads it as data, not instructions. To look at a file the sandbox downloaded,
+Claude runs another command that prints it (`cat`, `tar -tzf`, `strings`).
+
+## Commands
+
+| Command | What it does |
+|---|---|
+| `labbox run [--in NAME] [--allow HOST] [--report] -- CMD` | Run a command in a VM. Without `--in`, a blank VM that's thrown away |
+| `labbox create / list / snapshot / restore / reset / delete` | Manage named sandboxes |
+| `labbox mcp [--hosts ...] [--pane auto\|off]` | Serve LabBox to an AI agent |
+| `labbox watch` | The live view, in any terminal |
+| `labbox demo [--rebuild]` | Set up or reset the demo sandbox |
+| `labbox doctor` | Check this Mac can run LabBox |
+
+Always build with `scripts/build.sh`: it signs the binary with the
+`com.apple.security.virtualization` entitlement, without which macOS refuses
+to start a VM.
+
 ## The VM
 
 Each run boots a fresh Linux VM with Apple's Virtualization.framework
