@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" width="960" height="400" role="img" aria-labelledby="title desc">
+<title id="title">How LabBox works</title>
+<desc id="desc">Claude Code on your Mac asks LabBox to try a package. LabBox boots a throwaway Linux VM with no network card and no shared folders, plants fake keys, and runs the install. The download from the npm registry is allowed. The package reads the fake keys and tries to upload them; LabBox blocks the upload. A report with 8 flags goes back to Claude, the VM is destroyed, and Claude advises not to install.</desc>
+<style>
+:root{--bg:#ffffff;--panel:#f6f8fa;--line:#d0d7de;--fg:#1f2328;--mut:#59636e;
+--acc:#0969da;--ok:#1a7f37;--bad:#cf222e;--vm:#8250df;--vmbg:#fbf8ff;--hot:#ffebe9}
+@media (prefers-color-scheme:dark){:root{--bg:#0d1117;--panel:#161b22;--line:#30363d;--fg:#e6edf3;
+--mut:#9198a1;--acc:#4493f8;--ok:#3fb950;--bad:#f85149;--vm:#ab7df8;--vmbg:#1a1527;--hot:#4a1d1f}}
+
+text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;font-size:13px}
+.t{fill:var(--fg)} .m{fill:var(--mut)} .b{font-weight:600} .big{font-size:16px} .s{font-size:11.5px}
+.i{font-style:italic} .acc{fill:var(--acc)} .ok{fill:var(--ok)} .bad{fill:var(--bad)}
+.code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;fill:var(--fg)}
+.code.s{font-size:11px} .cap{font-size:11px;letter-spacing:.08em;fill:var(--mut);font-weight:600}
+.bg{fill:var(--bg);stroke:var(--line)} .mac{fill:none;stroke:var(--line);stroke-dasharray:6 5}
+.card{fill:var(--panel);stroke:var(--line)} .lb{stroke:var(--acc);stroke-width:1.5}
+.vmidle{fill:none;stroke:var(--vm);stroke-width:1.5;stroke-dasharray:4 4}
+.vm{fill:var(--vmbg);stroke:var(--vm);stroke-width:2}
+.net{fill:var(--panel);stroke:var(--line)}
+.wire{stroke:var(--line);stroke-width:2} .dash{stroke-dasharray:5 5}
+.chip{fill:var(--panel);stroke:var(--line)} .chiphot{fill:none;stroke:var(--bad);stroke-width:2}
+.gone{fill:var(--bg);fill-opacity:.94}
+.pk{stroke-width:1.5} .pkt{font-size:11.5px;font-weight:600;fill:#fff}
+.pcmd{fill:var(--acc);stroke:var(--acc)} .pok{fill:var(--ok);stroke:var(--ok)}
+.pbad{fill:var(--bad);stroke:var(--bad)} .prep{fill:var(--vm);stroke:var(--vm)}
+.xdot{fill:var(--bad)} .xmark{fill:#fff;font-size:15px}
+.w1{opacity:0;animation:w1 14s linear infinite}.w2{opacity:0;animation:w2 14s linear infinite}.w3{opacity:0;animation:w3 14s linear infinite}.w4{opacity:0;animation:w4 14s linear infinite}.w5{opacity:0;animation:w5 14s linear infinite}.w6{opacity:0;animation:w6 14s linear infinite}.w7{opacity:0;animation:w7 14s linear infinite}.w8{opacity:0;animation:w8 14s linear infinite}.w9{opacity:0;animation:w9 14s linear infinite}.w10{opacity:0;animation:w10 14s linear infinite}.w11{opacity:0;animation:w11 14s linear infinite}.w12{opacity:0;animation:w12 14s linear infinite}.w13{opacity:0;animation:w13 14s linear infinite}.w14{opacity:0;animation:w14 14s linear infinite}.w15{opacity:0;animation:w15 14s linear infinite}.w16{opacity:0;animation:w16 14s linear infinite}.w17{opacity:0;animation:w17 14s linear infinite}.w18{opacity:0;animation:w18 14s linear infinite}.m19{opacity:0;animation:m19 14s ease-in-out infinite}.m20{opacity:0;animation:m20 14s ease-in-out infinite}.m21{opacity:0;animation:m21 14s ease-in-out infinite}.w22{opacity:0;animation:w22 14s linear infinite}.m23{opacity:0;animation:m23 14s ease-in-out infinite}@keyframes w1{0%,0%{opacity:0}0%,82%{opacity:1}83.0%,100%{opacity:0}}@keyframes w2{0%,0%{opacity:0}0%,82%{opacity:1}83.0%,100%{opacity:0}}@keyframes w3{0%,85.0%{opacity:0}86%,99%{opacity:1}100.0%,100%{opacity:0}}@keyframes w4{0%,0%{opacity:0}0%,13%{opacity:1}14.0%,100%{opacity:0}}@keyframes w5{0%,13.0%{opacity:0}14%,21%{opacity:1}22.0%,100%{opacity:0}}@keyframes w6{0%,21.0%{opacity:0}22%,33%{opacity:1}34.0%,100%{opacity:0}}@keyframes w7{0%,33.0%{opacity:0}34%,50%{opacity:1}51.0%,100%{opacity:0}}@keyframes w8{0%,51.0%{opacity:0}52%,69%{opacity:1}70.0%,100%{opacity:0}}@keyframes w9{0%,69.0%{opacity:0}70%,99%{opacity:1}100.0%,100%{opacity:0}}@keyframes w10{0%,11%{opacity:0}13%,84%{opacity:1}86%,100%{opacity:0}}@keyframes w11{0%,15.0%{opacity:0}16%,84%{opacity:1}85.0%,100%{opacity:0}}@keyframes w12{0%,21.0%{opacity:0}22%,84%{opacity:1}85.0%,100%{opacity:0}}@keyframes w13{0%,45.0%{opacity:0}46%,84%{opacity:1}85.0%,100%{opacity:0}}@keyframes w14{0%,45.0%{opacity:0}46%,84%{opacity:1}85.0%,100%{opacity:0}}@keyframes w15{0%,45.0%{opacity:0}46%,84%{opacity:1}85.0%,100%{opacity:0}}@keyframes w16{0%,29.0%{opacity:0}30%,84%{opacity:1}85.0%,100%{opacity:0}}@keyframes w17{0%,45.0%{opacity:0}46%,84%{opacity:1}85.0%,100%{opacity:0}}@keyframes w18{0%,85.0%{opacity:0}86%,99%{opacity:1}100.0%,100%{opacity:0}}@keyframes m19{0%,3.99%{opacity:0;transform:translate(270px,203px)}4%{opacity:1;transform:translate(270px,203px)}9%{opacity:1;transform:translate(440.0px,203px)}11%{opacity:1;transform:translate(440.0px,203px)}16%{opacity:1;transform:translate(668px,203px)}17%,100%{opacity:0;transform:translate(668px,203px)}}@keyframes m20{0%,33.99%{opacity:0;transform:translate(638px,203px)}34%{opacity:1;transform:translate(638px,203px)}38%{opacity:1;transform:translate(440.0px,203px)}44%{opacity:1;transform:translate(440.0px,70px)}45%,100%{opacity:0;transform:translate(440.0px,70px)}}@keyframes m21{0%,51.99%{opacity:0;transform:translate(638px,247px)}52%{opacity:1;transform:translate(638px,247px)}57%{opacity:1;transform:translate(595px,247px)}61%{opacity:1;transform:translate(595px,247px)}62%,100%{opacity:0;transform:translate(595px,247px)}}@keyframes w22{0%,56.5%{opacity:0}57%,64%{opacity:1}64.5%,100%{opacity:0}}@keyframes m23{0%,69.99%{opacity:0;transform:translate(658px,247px)}70%{opacity:1;transform:translate(658px,247px)}84%{opacity:1;transform:translate(200px,247px)}85%,100%{opacity:0;transform:translate(200px,247px)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}.still{opacity:1!important}}
+</style>
+<rect x="1" y="1" width="958" height="398" rx="16" class="bg"/>
+<line x1="440" y1="58" x2="440" y2="140" class="wire dash"/>
+<rect x="380" y="20" width="120" height="38" rx="19" class="net"/>
+<text x="440" y="44" class="t b " text-anchor="middle">Internet</text>
+<rect x="20" y="86" width="920" height="294" rx="14" class="mac"/>
+<text x="36" y="110" class="cap " text-anchor="start">YOUR MAC</text>
+<line x1="270" y1="225" x2="345" y2="225" class="wire"/>
+<line x1="535" y1="225" x2="598" y2="225" class="wire"/>
+<rect x="40" y="140" width="230" height="170" rx="12" class="card"/>
+<text x="56" y="170" class="t b big " text-anchor="start">Claude Code</text>
+<text x="56" y="190" class="t m " text-anchor="start">decides what to try</text>
+<text x="56" y="232" class="t i w1" text-anchor="start">“Try this package in</text>
+<text x="56" y="252" class="t i w2" text-anchor="start">LabBox first.”</text>
+<text x="56" y="226" class="t i bad w3 still" text-anchor="start">“Don’t install it.</text>
+<text x="56" y="246" class="t i bad w3 still" text-anchor="start">It read your keys and</text>
+<text x="56" y="266" class="t i bad w3 still" text-anchor="start">tried to upload them.”</text>
+<text x="56" y="336" class="t m s " text-anchor="start">your real ~/.ssh and ~/.aws</text>
+<text x="56" y="352" class="t m s " text-anchor="start">never enter the VM</text>
+<rect x="345" y="140" width="190" height="170" rx="12" class="card lb"/>
+<text x="440.0" y="170" class="t b big " text-anchor="middle">LabBox</text>
+<text x="440.0" y="190" class="t m " text-anchor="middle">gate · log · report</text>
+<text x="440.0" y="277" class="t b m w4" text-anchor="middle">waiting</text>
+<text x="440.0" y="277" class="t b acc w5" text-anchor="middle">booting VM · 0.3 s</text>
+<text x="440.0" y="277" class="t b acc w6" text-anchor="middle">planting fake keys</text>
+<text x="440.0" y="277" class="t b ok w7" text-anchor="middle">✓ registry.npmjs.org</text>
+<text x="440.0" y="277" class="t b bad w8" text-anchor="middle">✗ upload BLOCKED</text>
+<text x="440.0" y="277" class="t b bad w9 still" text-anchor="middle">report: 8 flags</text>
+<text x="440.0" y="297" class="t m s " text-anchor="middle">on your Mac, outside the VM</text>
+<rect x="598" y="108" width="332" height="236" rx="12" class="vm still w10"/>
+<rect x="598" y="108" width="332" height="236" rx="12" class="vmidle"/>
+<text x="614" y="134" class="t b big " text-anchor="start">Linux VM</text>
+<text x="614" y="152" class="t m s " text-anchor="start">own kernel · no network card · no shared folders</text>
+<text x="614" y="182" class="code w11 still" text-anchor="start">$ npm install quickpdf-render-demo</text>
+<text x="614" y="208" class="t m s w12 still" text-anchor="start">fake keys, new every run:</text>
+<g class="w12 still"><rect x="614" y="216" width="95.8" height="22" rx="6" class="chip"/><text x="661.9" y="231" class="code s " text-anchor="middle">~/.ssh/id_rsa</text></g>
+<rect x="614" y="216" width="95.8" height="22" rx="6" class="chiphot still w13"/>
+<g class="w12 still"><rect x="717.8" y="216" width="128.8" height="22" rx="6" class="chip"/><text x="782.1999999999999" y="231" class="code s " text-anchor="middle">~/.aws/credentials</text></g>
+<rect x="717.8" y="216" width="128.8" height="22" rx="6" class="chiphot still w14"/>
+<g class="w12 still"><rect x="854.6" y="216" width="62.8" height="22" rx="6" class="chip"/><text x="886.0" y="231" class="code s " text-anchor="middle">~/.npmrc</text></g>
+<rect x="854.6" y="216" width="62.8" height="22" rx="6" class="chiphot still w15"/>
+<text x="614" y="264" class="code w16 still" text-anchor="start">&gt; node setup.js</text>
+<text x="614" y="286" class="code bad w17 still" text-anchor="start">reads the keys, tries to upload them</text>
+<rect x="598" y="108" width="332" height="236" rx="12" class="gone w18"/>
+<text x="764.0" y="222.0" class="t b big w18" text-anchor="middle">VM destroyed</text>
+<text x="764.0" y="244.0" class="t m w18" text-anchor="middle">nothing kept, nothing on your Mac</text>
+<text x="480.0" y="370" class="t m " text-anchor="middle">Claude decides what to run  ·  LabBox runs it in a throwaway VM  ·  only text comes back</text>
+<g class="m19"><rect x="-75.0" y="-12" width="150" height="24" rx="12" class="pk pcmd"/><text x="0" y="4" class="pkt " text-anchor="middle">command</text></g>
+<g class="m20"><rect x="-90.0" y="-12" width="180" height="24" rx="12" class="pk pok"/><text x="0" y="4" class="pkt " text-anchor="middle">GET registry.npmjs.org</text></g>
+<g class="m21"><rect x="-75.0" y="-12" width="150" height="24" rx="12" class="pk pbad"/><text x="0" y="4" class="pkt " text-anchor="middle">POST your keys</text></g>
+<g class="w22"><circle cx="533" cy="247" r="13" class="xdot"/><text x="533" y="252" class="t b xmark " text-anchor="middle">✗</text></g>
+<g class="m23"><rect x="-75.0" y="-12" width="150" height="24" rx="12" class="pk prep"/><text x="0" y="4" class="pkt " text-anchor="middle">report: 8 flags</text></g>
+</svg>

@@ -131,6 +131,14 @@ split beside the agent's terminal: through Ghostty's AppleScript interface
 measured on the host as each event arrives. Live events are capped at 300 per
 run; the report has the full list.
 
+## The animation in the README
+
+[labbox-flow.svg](labbox-flow.svg) is plain SVG with CSS animation and no
+scripts, so GitHub shows it as an image. It follows the reader's light or
+dark setting, and shows a single still frame to people who turn on "reduce
+motion". It's generated: edit the timeline in
+[make-flow-svg.py](make-flow-svg.py) and run `python3 docs/make-flow-svg.py`.
+
 ## Decisions
 
 - **Virtualization.framework directly**, not Lima or Tart. Lima controls the

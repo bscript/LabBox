@@ -12,6 +12,10 @@ LabBox first and gets back a report of what the code actually did: which
 servers it called, which secrets it went for, what it changed, what it left
 running. Then it decides.
 
+<p align="center">
+  <img src="docs/labbox-flow.svg" width="100%" alt="Claude Code asks LabBox to try a package. LabBox boots a throwaway Linux VM with fake keys, allows the download from npm, blocks the package's attempt to upload the keys, and sends back a report with 8 flags. The VM is destroyed and Claude advises not to install.">
+</p>
+
 <!-- Demo video: add link here -->
 
 ## Why
